@@ -18,14 +18,41 @@
       "required": true,
       "unique": true
     },
-    "merchant": {
+    "deal_slug": {
+      "type": "string",
+      "unique": true
+    },
+    "deal_merchant_name": {
       "type": "string",
       "maxLength": 100,
       "required": true
     },
+    "merchant_code": {
+      "type": "string"
+    },
     "deal_code": {
       "type": "string",
       "maxLength": 255
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category",
+      "mappedBy": "deal"
+    },
+    "deal_pill_text": {
+      "type": "string"
+    },
+    "deal_cta_text": {
+      "type": "enumeration",
+      "default": "Get Deal",
+      "enum": [
+        "Get Deal",
+        "Shop Now"
+      ]
+    },
+    "deal_coupon_text": {
+      "type": "string"
     },
     "product": {
       "type": "string",
@@ -39,6 +66,32 @@
     },
     "deal_url": {
       "type": "string"
+    },
+    "logo_img": {
+      "type": "string"
+    },
+    "logo_bg_color": {
+      "type": "string"
+    },
+    "deal_description": {
+      "type": "text"
+    },
+    "img_thumbnail": {
+      "type": "text"
+    },
+    "img_full": {
+      "type": "text"
+    },
+    "img_mob": {
+      "type": "text"
+    },
+    "deal_copy_desktop": {
+      "type": "text",
+      "maxLength": 3000
+    },
+    "deal_copy_mob": {
+      "type": "text",
+      "maxLength": 2000
     }
   }
 }

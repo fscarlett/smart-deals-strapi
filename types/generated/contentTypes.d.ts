@@ -430,6 +430,37 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
+  collectionName: 'categories';
+  info: {
+    displayName: 'Category';
+    pluralName: 'categories';
+    singularName: 'category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category_description: Schema.Attribute.Text;
+    category_name: Schema.Attribute.String & Schema.Attribute.Required;
+    category_slug: Schema.Attribute.String & Schema.Attribute.Unique;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    deal: Schema.Attribute.Relation<'manyToOne', 'api::deal.deal'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiDealDeal extends Struct.CollectionTypeSchema {
   collectionName: 'deals';
   info: {
@@ -441,6 +472,10 @@ export interface ApiDealDeal extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    categories: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -448,7 +483,24 @@ export interface ApiDealDeal extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 255;
       }>;
+    deal_copy_desktop: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 3000;
+      }>;
+    deal_copy_mob: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 2000;
+      }>;
+    deal_coupon_text: Schema.Attribute.String;
+    deal_cta_text: Schema.Attribute.Enumeration<['Get Deal', 'Shop Now']> &
+      Schema.Attribute.DefaultTo<'Get Deal'>;
+    deal_description: Schema.Attribute.Text;
     deal_end_date: Schema.Attribute.DateTime;
+    deal_merchant_name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
     deal_name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -456,16 +508,19 @@ export interface ApiDealDeal extends Struct.CollectionTypeSchema {
         maxLength: 200;
         minLength: 6;
       }>;
+    deal_pill_text: Schema.Attribute.String;
+    deal_slug: Schema.Attribute.String & Schema.Attribute.Unique;
     deal_start_date: Schema.Attribute.DateTime;
     deal_url: Schema.Attribute.String;
+    img_full: Schema.Attribute.Text;
+    img_mob: Schema.Attribute.Text;
+    img_thumbnail: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::deal.deal'> &
       Schema.Attribute.Private;
-    merchant: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
+    logo_bg_color: Schema.Attribute.String;
+    logo_img: Schema.Attribute.String;
+    merchant_code: Schema.Attribute.String;
     product: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 5;
@@ -988,6 +1043,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::category.category': ApiCategoryCategory;
       'api::deal.deal': ApiDealDeal;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
