@@ -16,6 +16,10 @@
       "required": true,
       "unique": false
     },
+    "category_display_name": {
+      "type": "string",
+      "required": true
+    },
     "category_slug": {
       "type": "string",
       "unique": true
