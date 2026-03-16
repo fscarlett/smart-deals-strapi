@@ -32,6 +32,10 @@
       "relation": "manyToOne",
       "target": "api::deal.deal",
       "inversedBy": "categories"
+    },
+    "category_order": {
+      "type": "integer",
+      "default": 50
     }
   }
 }

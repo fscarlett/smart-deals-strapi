@@ -444,6 +444,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     category_description: Schema.Attribute.Text;
     category_display_name: Schema.Attribute.String & Schema.Attribute.Required;
     category_name: Schema.Attribute.String & Schema.Attribute.Required;
+    category_order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<50>;
     category_slug: Schema.Attribute.String & Schema.Attribute.Unique;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
