@@ -518,6 +518,7 @@ export interface ApiDealDeal extends Struct.CollectionTypeSchema {
     img_mob: Schema.Attribute.Text;
     img_thumbnail: Schema.Attribute.Text;
     is_featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    is_in_hero: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::deal.deal'> &
       Schema.Attribute.Private;

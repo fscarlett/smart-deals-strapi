@@ -40,6 +40,10 @@
       "target": "api::category.category",
       "mappedBy": "deal"
     },
+    "is_in_hero": {
+      "type": "boolean",
+      "default": false
+    },
     "is_featured": {
       "type": "boolean",
       "default": false
