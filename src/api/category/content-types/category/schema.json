@@ -35,7 +35,7 @@
     },
     "category_order": {
       "type": "integer",
-      "default": 50
+      "default": 500
     }
   }
 }
