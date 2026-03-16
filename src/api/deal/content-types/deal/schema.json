@@ -40,6 +40,10 @@
       "target": "api::category.category",
       "mappedBy": "deal"
     },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    },
     "deal_pill_text": {
       "type": "string"
     },
